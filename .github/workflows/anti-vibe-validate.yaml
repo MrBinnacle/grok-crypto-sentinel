@@ -1,0 +1,42 @@
+# .github/workflows/anti-vibe-validate.yml
+---
+name: ✨ Anti-Vibe Compliance Check
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  anti-vibe-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📂 Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: 🚀 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: 🔧 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install black ruff yamllint pytest
+
+      - name: ✅ Run Black (Formatter Check)
+        run: black . --check
+
+      - name: 🛠️ Run Ruff (Linter)
+        run: ruff .
+
+      - name: 🔍 Run yamllint
+        run: yamllint .
+
+      - name: 🔬 Run Unit Tests (Anti-Vibe Validators)
+        run: pytest tests/
+
+      - name: 🏆 Passes Codex Anti-Vibe Protocol
+        run: echo "✅ All checks passed per Anti-Vibe Coding Protocol."
