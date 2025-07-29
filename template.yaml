@@ -1,0 +1,4 @@
+signals:
+  - type: entry
+    levels: [2.70, 2.85]
+    trigger: on-volume-spike
