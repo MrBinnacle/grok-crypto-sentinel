@@ -9,7 +9,13 @@
 This template is for tactical signal-based crypto alerts...
 # 📘 Grok Crypto Sentinel Template – README
 
+# 📘 Grok Crypto Sentinel Template – README
+
 This is the official Grok Crypto Sentinel Template. It enables high-signal, persona-calibrated crypto alerting using modular logic, narrative filters, and behaviorally aligned reflection triggers.
+
+## 🚀 Overview
+
+Grok Crypto Sentinel delivers structured, noise-resistant signal intelligence for crypto holders prioritizing asymmetric positioning and narrative risk filtering. It is designed for daily tactical use by distinct investor personas.
 
 ## 🔧 Usage Guide
 
@@ -65,6 +71,7 @@ We welcome forks, overlays, and strategy enhancements.
 - Submit test or sample outputs for PRs.
 - Use semantic versioning (e.g. 1.0.1 for bugfix, 1.1.0 for features).
 - Validate new signals using synthetic or backtested input samples.
+- Confirm signal format compliance against the defined insight contract.
 ```
 
 ### examples/sample_output_sniper.md
@@ -107,5 +114,22 @@ Quick Context: No volatility or divergence across majors.
    - Whale movements
    - Contrarian sentiment alerts
 
-Custom signals can be added under each block in the YAML.
+## 🧪 Testing & Validation
+
+- Run test suite in `tests/` to ensure schema and persona compatibility.
+- Output examples must match the markdown structure expected in Grok.
+- Persona fusion logic must be synthetic-testable.
+
+## 🧠 Anti-Vibe Codex Compliance
+
+- Signal schema must enforce `what happened`, `why it matters`, and `suggested posture`.
+- Repetition constraints: No identical signal type may re-trigger <24h.
+- Output must never exceed 3 core insights per persona/day.
+
+## 🔁 Future Versions
+
+### [1.1.0] - TBD
+- Expanded asset support (SOL, DOGE, AVAX)
+- Signal priority tuning per strategy type
+- Multi-channel webhook dispatcher
 ```
