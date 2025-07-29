@@ -1,3 +1,4 @@
+---
 primary_asset: XRP
 secondary_assets: [BTC, ETH]
 strategy_profile: "asymmetric accumulation"
