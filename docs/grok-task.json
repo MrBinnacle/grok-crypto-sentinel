@@ -1,0 +1,7 @@
+{
+  "template_name": "Grok Crypto Sentinel",
+  "version": "1.0.0",
+  "description": "Tactical crypto alert framework with persona-based signal logic.",
+  "default_run_time": "09:15",
+  "default_assets": ["XRP", "BTC", "ETH"]
+}

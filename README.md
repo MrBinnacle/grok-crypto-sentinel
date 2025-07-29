@@ -7,3 +7,105 @@
 
 
 This template is for tactical signal-based crypto alerts...
+# 📘 Grok Crypto Sentinel Template – README
+
+This is the official Grok Crypto Sentinel Template. It enables high-signal, persona-calibrated crypto alerting using modular logic, narrative filters, and behaviorally aligned reflection triggers.
+
+## 🔧 Usage Guide
+
+1. Load `template.yaml` into your Grok Task.
+2. Choose a persona from `persona_presets.yaml`.
+3. Run the task at 9:15 AM ET.
+4. Monitor output block for:
+   - Entry opportunities
+   - Macro/regulatory shifts
+   - Whale movements
+   - Contrarian sentiment alerts
+
+Custom signals can be added under each block in the YAML.
+
+## 📁 Suggested File Additions
+
+### .grok-task.json
+```json
+{
+  "template_name": "Grok Crypto Sentinel",
+  "version": "1.0.0",
+  "description": "Tactical crypto alert framework with persona-based signal logic.",
+  "default_run_time": "09:15",
+  "default_assets": ["XRP", "BTC", "ETH"]
+}
+```
+
+### CHANGELOG.md
+```markdown
+# Changelog
+
+## [1.0.0] - 2025-07-29
+- Initial release
+- Modular YAML structure
+- Persona overlay logic
+- Entry, breakout, narrative, and whale signals
+
+## [1.1.0] - TBD
+- Planned support for Solana, DOGE, and memecoin overlays
+- Sentiment compression modes for SMS/Discord delivery
+- Strategy-based signal frequency throttling
+```
+
+### CONTRIBUTING.md
+```markdown
+# Contributing Guide
+
+We welcome forks, overlays, and strategy enhancements. 
+
+- Follow Codex-aligned engineering principles.
+- Use persona structure to drive customization.
+- Comment changes clearly in the YAML.
+- Submit test or sample outputs for PRs.
+- Use semantic versioning (e.g. 1.0.1 for bugfix, 1.1.0 for features).
+- Validate new signals using synthetic or backtested input samples.
+```
+
+### examples/sample_output_sniper.md
+```markdown
+[📆 2025-07-29 – 09:15 ET]
+
+Quick Context: XRP holding in mid-volatility zone with low BTC correlation.
+
+• 🔍 Volume Divergence
+📉 XRP volume +46% in low-vol chop
+🎯 Suggests potential early accumulation setup
+🧭 Posture: [accumulate]
+
+📈 Entry Radar Status: Near $2.85 zone
+🧠 Daily Reflection: Conviction grows in silence.
+```
+
+### examples/sample_output_novice.md
+```markdown
+[📆 2025-07-29 – 09:15 ET]
+
+Quick Context: No volatility or divergence across majors.
+
+🟢 No critical signals today. Stay the course.
+
+📈 Entry Radar Status: None triggered
+🧠 Daily Reflection: Let others chase the obvious.
+```
+
+### docs/usage_walkthrough.md
+```markdown
+# Usage Guide
+
+1. Load `template.yaml` into your Grok Task.
+2. Choose a persona from `persona_presets.yaml`.
+3. Run the task at 9:15 AM ET.
+4. Monitor output block for:
+   - Entry opportunities
+   - Macro/regulatory shifts
+   - Whale movements
+   - Contrarian sentiment alerts
+
+Custom signals can be added under each block in the YAML.
+```

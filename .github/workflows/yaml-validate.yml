@@ -1,5 +1,15 @@
 name: YAML Lint
-on: [push, pull_request]
+
+on:
+  push:
+    paths:
+      - '**.yaml'
+      - '**.yml'
+  pull_request:
+    paths:
+      - '**.yaml'
+      - '**.yml'
+
 jobs:
   yamllint:
     runs-on: ubuntu-latest

@@ -1,5 +1,12 @@
+# Grok Template & Python
 *.pyc
-__pycache__
+__pycache__/
 .env
 *.log
 .vscode/
+*.DS_Store
+*.ipynb_checkpoints
+
+# OS / IDE / editor junk
+.idea/
+*.swp

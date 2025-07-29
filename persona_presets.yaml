@@ -1,4 +1,22 @@
-novice_plus:
-  entry_radar: active
-  macro_watch: filtered
-  tone: explanatory
+persona_presets:
+  novice_plus:
+    strategy_profile: "long-term hold"
+    max_insights_per_day: 2
+    enable_contrarian_watch: false
+    reflection_tone: "encouraging"
+    exclude: ["black_swan_override"]
+
+  asymmetric_sniper:
+    strategy_profile: "conviction-based accumulation"
+    enable_all_signals: true
+    cooldown_periods:
+      per_signal_type: 12h
+    reflection_tone: "stoic"
+
+  swing_trader:
+    strategy_profile: "reactive tactical"
+    enable_contrarian_watch: true
+    add_signals:
+      - "rsi_crossovers"
+      - "moving_average_breaks"
+    max_insights_per_day: 3
