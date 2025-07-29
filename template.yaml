@@ -1,4 +1,13 @@
 ---
+signals:
+  - what_happened: "BTC dominance surge while XRP retraced"
+    why_it_matters: "Signals potential capital rotation to altcoins"
+    suggested_posture: "accumulate"
+
+  - what_happened: "Whale movement detected (22M XRP)"
+    why_it_matters: "Indicates potential long-hold custodial prep"
+    suggested_posture: "accumulate"
+  
 primary_asset: XRP
 secondary_assets: [BTC, ETH]
 strategy_profile: "asymmetric accumulation"
@@ -33,3 +42,4 @@ black_swan_override:
 
 cooldown_periods:
   per_signal_type: 24h
+

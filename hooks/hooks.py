@@ -16,6 +16,9 @@ def route_signal(signal: dict, persona: str):
 
     # Dispatch to Notion
     if os.getenv("NOTION_TOKEN") and os.getenv("NOTION_DB_ID"):
-        notion_webhook.send(signal, persona)
+        try:
+            notion_webhook.send(signal, persona)
+        except AttributeError:
+            raise NotImplementedError("notion_webhook module must implement a 'send(signal, persona)' method.")
 
     # Extend with Slack, email, CSV, etc.
