@@ -1,24 +1,28 @@
----
 repos:
+  - repo: local
+    hooks:
+      - id: schema-validator
+        name: Schema Validator
+        entry: python validate_codex.py
+        language: python
+        types: [yaml]
+        always_run: true
+        pass_filenames: false
+        stages: [commit]
+
   - repo: https://github.com/psf/black
-    rev: 25.1.0
+    rev: 24.4.2
     hooks:
       - id: black
-
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-yaml
-      - id: check-json
-
-  - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.33.0
-    hooks:
-      - id: yamllint
+        language_version: python3
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: v0.4.4
     hooks:
       - id: ruff
+
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.32.0
+    hooks:
+      - id: yamllint
+        files: \.(yml|yaml)$
