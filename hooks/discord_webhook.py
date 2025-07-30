@@ -1,12 +1,17 @@
 import os
 import requests
 
-def send(payload):
-    url = os.environ.get("DISCORD_WEBHOOK_URL")
-    if not url:
+def send(signal, persona):
+    webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+    if not webhook_url:
         raise EnvironmentError("DISCORD_WEBHOOK_URL environment variable is not set.")
+
+    payload = {
+        "content": f"Signal: {signal}\nPersona: {persona}"
+    }
+
     try:
-        response = requests.post(url, json=payload, timeout=10)
+        response = requests.post(webhook_url, json=payload, timeout=10)
         response.raise_for_status()
-    except requests.RequestException as e:
-        raise RuntimeError(f"Failed to send Discord webhook: {e}") from e
+    except requests.RequestException as error:
+        raise RuntimeError(f"Failed to send Discord webhook: {error}") from error

@@ -1,4 +1,4 @@
-[📆 2025-07-29 – 09:15 ET]
+# 📆 2025-07-29 – 09:15 ET
 
 Quick Context: BTC dominance spiked as XRP retraced from $2.85 zone.
 

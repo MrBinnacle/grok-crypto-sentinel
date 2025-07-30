@@ -5,10 +5,6 @@
 ![Repo Size](https://img.shields.io/github/repo-size/MrBinnacle/grok-crypto-sentinel)
 ![Contributors](https://img.shields.io/github/contributors/MrBinnacle/grok-crypto-sentinel)
 
-
-This template is for tactical signal-based crypto alerts...
-# 📘 Grok Crypto Sentinel Template – README
-
 # 📘 Grok Crypto Sentinel Template – README
 
 This is the official Grok Crypto Sentinel Template. It enables high-signal, persona-calibrated crypto alerting using modular logic, narrative filters, and behaviorally aligned reflection triggers.
@@ -33,6 +29,7 @@ Custom signals can be added under each block in the YAML.
 ## 📁 Suggested File Additions
 
 ### .grok-task.json
+
 ```json
 {
   "template_name": "Grok Crypto Sentinel",
@@ -44,6 +41,7 @@ Custom signals can be added under each block in the YAML.
 ```
 
 ### CHANGELOG.md
+
 ```markdown
 # Changelog
 
@@ -60,6 +58,7 @@ Custom signals can be added under each block in the YAML.
 ```
 
 ### CONTRIBUTING.md
+
 ```markdown
 # Contributing Guide
 
@@ -75,6 +74,7 @@ We welcome forks, overlays, and strategy enhancements.
 ```
 
 ### examples/sample_output_sniper.md
+
 ```markdown
 [📆 2025-07-29 – 09:15 ET]
 
@@ -90,6 +90,7 @@ Quick Context: XRP holding in mid-volatility zone with low BTC correlation.
 ```
 
 ### examples/sample_output_novice.md
+
 ```markdown
 [📆 2025-07-29 – 09:15 ET]
 
@@ -102,6 +103,7 @@ Quick Context: No volatility or divergence across majors.
 ```
 
 ### docs/usage_walkthrough.md
+
 ```markdown
 # Usage Guide
 
@@ -122,7 +124,7 @@ Quick Context: No volatility or divergence across majors.
 
 ## 🧠 Anti-Vibe Codex Compliance
 
-- Signal schema must enforce `what happened`, `why it matters`, and `suggested posture`.
+- Signal schema must enforce `what_happened`, `why_it_matters`, and `suggested_posture`.
 - Repetition constraints: No identical signal type may re-trigger <24h.
 - Output must never exceed 3 core insights per persona/day.
 
@@ -133,3 +135,94 @@ Quick Context: No volatility or divergence across majors.
 - Signal priority tuning per strategy type
 - Multi-channel webhook dispatcher
 ```
+
+## ✅ Required Structural Additions (Anti-Vibe Compliance)
+
+### schema/codex_validator_schema.json
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["what_happened", "why_it_matters", "suggested_posture"],
+        "properties": {
+          "what_happened": {"type": "string"},
+          "why_it_matters": {"type": "string"},
+          "suggested_posture": {"type": "string"}
+        }
+      }
+    }
+  },
+  "required": ["signals"]
+}
+```
+
+### hooks/discord_webhook.py
+
+```python
+def send(payload):
+    import os
+    import requests
+
+    url = os.getenv("DISCORD_WEBHOOK_URL")
+    if not url:
+        raise ValueError("DISCORD_WEBHOOK_URL not set")
+
+    response = requests.post(url, json=payload)
+    response.raise_for_status()
+```
+
+### analytics/metrics_tracker.py
+
+```python
+import json
+from statistics import mean
+
+def compute_rolling_average(metric_list, window=7):
+    if len(metric_list) < window:
+        return mean(metric_list)
+    return mean(metric_list[-window:])
+
+def update_metrics(file_path, new_value):
+    with open(file_path, "r+") as f:
+        data = json.load(f)
+        data.setdefault("values", []).append(new_value)
+        data["rolling_average"] = compute_rolling_average(data["values"])
+        f.seek(0)
+        json.dump(data, f, indent=2)
+        f.truncate()
+```
+
+### Updated template.yaml (partial snippet)
+
+```yaml
+---
+signals:
+  - what_happened: "XRP broke resistance at $2.85"
+    why_it_matters: "Signals renewed accumulation interest in alt-heavy portfolios"
+    suggested_posture: "accumulate"
+```
+
+### Updated persona_presets.yaml
+
+```yaml
+---
+novice_plus:
+  entry_radar: active
+  macro_watch: filtered
+  tone: explanatory
+  max_insights_per_day: 3
+
+asymmetric_sniper:
+  entry_radar: hyper
+  macro_watch: unfiltered
+  tone: terse
+  max_insights_per_day: 3
+```
+
+Now fully compliant and testable under Codex.

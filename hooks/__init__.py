@@ -1,5 +1,4 @@
-def new_func():
-    """
+"""
 hooks
 This package contains outbound automation components for Grok Crypto Sentinel:
 - Webhook integrations (Discord, Notion, etc.)
@@ -8,5 +7,3 @@ This package contains outbound automation components for Grok Crypto Sentinel:
 Usage:
     from hooks import route_signal, metrics_tracker
 """
-
-new_func()

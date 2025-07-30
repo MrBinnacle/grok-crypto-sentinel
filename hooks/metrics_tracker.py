@@ -1,9 +1,10 @@
 import yaml
 import datetime
+from typing import Dict, Any
 
 METRICS_FILE = "metrics.yaml"
 
-def load_metrics():
+def load_metrics() -> Dict[str, Any]:
     try:
         with open(METRICS_FILE, "r") as f:
             return yaml.safe_load(f)
@@ -12,10 +13,10 @@ def load_metrics():
             "signals_triggered_today": 0,
             "average_signals_per_day": 0,
             "persona_uptime": {},
-            "last_updated": None
+            "last_updated": ""
         }
 
-def update_metrics(persona_used, signals_triggered):
+def update_metrics(persona_used: str, signals_triggered: int) -> None:
     metrics = load_metrics()
     today = datetime.date.today().isoformat()
 

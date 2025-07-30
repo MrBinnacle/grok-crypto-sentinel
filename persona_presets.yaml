@@ -1,23 +1,25 @@
 ---
 persona_presets:
   novice_plus:
-    strategy_profile: "long-term hold"
+    strategy_profile: long_term_hold
     max_insights_per_day: 2
     enable_contrarian_watch: false
-    reflection_tone: "encouraging"
-    exclude: ["black_swan_override"]
+    reflection_tone: encouraging
+    exclude:
+      - black_swan_override
 
   asymmetric_sniper:
-    strategy_profile: "conviction-based accumulation"
+    strategy_profile: conviction_based_accumulation
     enable_all_signals: true
     cooldown_periods:
       per_signal_type: 12h
-    reflection_tone: "stoic"
+    reflection_tone: stoic
 
   swing_trader:
-    strategy_profile: "reactive tactical"
+    strategy_profile: reactive_tactical
     enable_contrarian_watch: true
     add_signals:
-      - "rsi_crossovers"
-      - "moving_average_breaks"
+      - rsi_crossovers
+      - moving_average_breaks
     max_insights_per_day: 3
+
