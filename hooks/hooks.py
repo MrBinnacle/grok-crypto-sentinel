@@ -12,13 +12,15 @@ def route_signal(signal: dict, persona: str):
 
     # Dispatch to Discord
     if os.getenv("DISCORD_WEBHOOK_URL"):
-        discord_webhook.send(signal)
+        discord_webhook.send(signal, persona)
 
     # Dispatch to Notion
     if os.getenv("NOTION_TOKEN") and os.getenv("NOTION_DB_ID"):
         try:
             notion_webhook.send(signal, persona)
-        except AttributeError:
-            raise NotImplementedError("notion_webhook module must implement a 'send(signal, persona)' method.")
+        except (ImportError, ModuleNotFoundError) as e:
+            raise ImportError("notion_webhook module or its 'send' method is missing.") from e
+        except AttributeError as e:
+            raise AttributeError("notion_webhook module must implement a 'send(signal, persona)' method.") from e
 
     # Extend with Slack, email, CSV, etc.

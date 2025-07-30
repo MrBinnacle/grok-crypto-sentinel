@@ -1,19 +1,47 @@
+import os
 import requests
+import json
 from datetime import datetime
 
-headers = {
-    "Authorization": "Bearer YOUR_NOTION_SECRET",
-    "Content-Type": "application/json",
-    "Notion-Version": "2022-06-28"
-}
+def send(signal, persona):
+    """
+    Sends a signal to Notion.
 
-payload = {
-    "parent": { "database_id": "YOUR_DB_ID" },
-    "properties": {
-        "Date": { "date": { "start": datetime.utcnow().isoformat() } },
-        "Signal": { "title": [{ "text": { "content": "Breakout Watch Triggered" } }] },
-        "Action": { "rich_text": [{ "text": { "content": "Posture: Watch" } }] }
+    Args:
+        signal (dict): Signal dictionary containing title and posture.
+        persona (str): Active persona.
+
+    Raises:
+        ValueError: If NOTION_TOKEN environment variable is not set.
+    """
+
+    # Get Notion token and database ID from environment variables
+    notion_token = os.getenv("NOTION_TOKEN")
+    notion_db_id = os.getenv("NOTION_DB_ID")
+
+    # Check if Notion token is set
+    if notion_token is None:
+        raise ValueError("NOTION_TOKEN environment variable is not set")
+
+    # Set up headers and payload
+    headers = {
+        "Authorization": f"Bearer {notion_token}",
+        "Content-Type": "application/json",
+        "Notion-Version": "2022-06-28"
     }
-}
 
-requests.post("https://api.notion.com/v1/pages", json=payload, headers=headers)
+    payload = {
+        "parent": {"database_id": notion_db_id},
+        "properties": {
+            "Date": {"date": {"start": datetime.utcnow().isoformat()}},
+            "Signal": {"title": [{"text": {"content": signal["title"]}}]},
+            "Action": {"rich_text": [{"text": {"content": signal["posture"]}}]}
+        }
+    }
+
+    # Send request to Notion API
+    url = "https://api.notion.com/v1/pages"
+    response = requests.post(url, json=payload, headers=headers)
+
+    # Raise an error if the response was not successful
+    response.raise_for_status()
