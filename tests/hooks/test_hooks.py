@@ -1,6 +1,6 @@
 import pytest
-from hooks import route_signal
-from hooks import metrics_tracker
+from hooks.hooks import route_signal
+from hooks.metrics_tracker import update_metrics
 
 def test_route_signal_no_crash():
     """Ensure route_signal handles dummy signal safely without side effects."""
@@ -18,6 +18,6 @@ def test_route_signal_no_crash():
 def test_update_metrics_runs():
     """Confirm update_metrics writes to metrics.yaml without crashing."""
     try:
-        metrics_tracker.update_metrics("novice_plus", 2)
+        update_metrics("novice_plus", 2)
     except Exception as e:
         pytest.fail(f"update_metrics raised exception: {e}")
