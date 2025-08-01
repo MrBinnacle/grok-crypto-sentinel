@@ -14,7 +14,9 @@ def test_get_current_prices():
     try:
         prices = feed.get_current_prices(["bitcoin"])
         assert "bitcoin" in prices
+        assert isinstance(prices["bitcoin"], dict)
         assert "usd" in prices["bitcoin"]
         assert isinstance(prices["bitcoin"]["usd"], (int, float))
-    except Exception:
+    except Exception as e:
+        print(f"API test failed: {e}")
         pytest.skip("API unavailable")

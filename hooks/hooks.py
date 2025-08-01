@@ -1,13 +1,24 @@
 import os
+from typing import Dict, Any, Union
+
+from signals.breakout_detector import BreakoutSignal
 from hooks import discord_webhook, notion_webhook
 
-def route_signal(signal: dict, persona: str):
+class EnrichedBreakoutSignal(BreakoutSignal):
+    """Extended signal type with additional metadata."""
+    symbol: str
+    confluence_score: float
+
+def route_signal(signal: Union[Dict[str, Any], EnrichedBreakoutSignal], persona: str) -> None:
     """
     Routes a validated signal payload to appropriate outputs.
 
     Args:
-        signal (dict): Parsed signal dictionary from Grok output
-        persona (str): Active persona (e.g. "sniper", "novice_plus")
+        signal: Signal data as either a dictionary or EnrichedBreakoutSignal
+        persona: Active persona (e.g. "sniper", "novice_plus")
+        
+    Raises:
+        ValueError: If the signal is not in the expected format
     """
 
     # Dispatch to Discord
