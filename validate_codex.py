@@ -3,6 +3,7 @@
 import json
 import sys
 import yaml
+from jsonschema import validate, ValidationError
 
 def main():
     """Validate config.yaml against schema."""
@@ -15,27 +16,8 @@ def main():
         with open('schema/codex_validator_schema.json', 'r', encoding='utf-8') as f:
             schema = json.load(f)
         
-        # Basic validation - check required keys
-        if 'schedule' not in config:
-            print("ERROR: Missing 'schedule' key in config")
-            return False
-            
-        if 'codex' not in config:
-            print("ERROR: Missing 'codex' key in config")
-            return False
-            
-        if 'run_time' not in config['schedule']:
-            print("ERROR: Missing 'run_time' in schedule")
-            return False
-            
-        codex = config['codex']
-        if 'breakout_watch' not in codex:
-            print("ERROR: Missing 'breakout_watch' in codex")
-            return False
-            
-        if 'onchain_signal' not in codex:
-            print("ERROR: Missing 'onchain_signal' in codex")
-            return False
+        # Validate against JSON schema
+        validate(instance=config, schema=schema)
         
         print("SUCCESS: Config validation passed!")
         return True
@@ -50,6 +32,10 @@ def main():
         
     except json.JSONDecodeError as e:
         print(f"ERROR: JSON parsing failed - {e}")
+        return False
+        
+    except ValidationError as e:
+        print(f"ERROR: Schema validation failed - {e.message}")
         return False
         
     except Exception as e:

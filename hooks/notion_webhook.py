@@ -19,9 +19,11 @@ def send(signal, persona):
     notion_token = os.getenv("NOTION_TOKEN")
     notion_db_id = os.getenv("NOTION_DB_ID")
 
-    # Check if Notion token is set
+    # Check if required environment variables are set
     if notion_token is None:
         raise ValueError("NOTION_TOKEN environment variable is not set")
+    if notion_db_id is None:
+        raise ValueError("NOTION_DB_ID environment variable is not set")
 
     # Set up headers and payload
     headers = {
@@ -41,7 +43,8 @@ def send(signal, persona):
 
     # Send request to Notion API
     url = "https://api.notion.com/v1/pages"
-    response = requests.post(url, json=payload, headers=headers)
-
-    # Raise an error if the response was not successful
-    response.raise_for_status()
+    try:
+        response = requests.post(url, json=payload, headers=headers)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        raise RuntimeError(f"Notion webhook failed: {e}") from e

@@ -29,9 +29,17 @@ def update_metrics(persona_used: str, signals_triggered: int) -> None:
         metrics["persona_uptime"][persona_used] = 0
     metrics["persona_uptime"][persona_used] += 1
 
-    # TODO: calculate rolling average
-    with open(METRICS_FILE, "w") as f:
-        yaml.dump(metrics, f)
+    # Calculate rolling average
+    metrics.setdefault("daily_signals", []).append(signals_triggered)
+    if len(metrics["daily_signals"]) > 7:
+        metrics["daily_signals"] = metrics["daily_signals"][-7:]
+    metrics["average_signals_per_day"] = sum(metrics["daily_signals"]) / len(metrics["daily_signals"])
+
+    try:
+        with open(METRICS_FILE, "w") as f:
+            yaml.dump(metrics, f)
+    except IOError as e:
+        raise RuntimeError(f"Failed to update metrics file: {e}") from e
 
 if __name__ == "__main__":
     # EXAMPLE USAGE
