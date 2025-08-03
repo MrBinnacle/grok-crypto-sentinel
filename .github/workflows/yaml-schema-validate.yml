@@ -19,6 +19,7 @@ jobs:
           import json
           import jsonschema
           with open('config.yaml') as y: data = yaml.safe_load(y)
-          with open('schema/codex_validator_schema.json') as s: schema = json.load(s)
+          with open('schema/codex_validator_schema.json') as s:
+            schema = json.load(s)
           jsonschema.validate(instance=data, schema=schema)
           "

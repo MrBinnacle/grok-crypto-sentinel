@@ -22,4 +22,3 @@ persona_presets:
       - rsi_crossovers
       - moving_average_breaks
     max_insights_per_day: 3
-
