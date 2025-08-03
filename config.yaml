@@ -1,0 +1,14 @@
+---
+schedule:
+  run_time: "09:00:00"
+
+codex:
+  breakout_watch:
+    support_floor: 2.85
+    breakout_zone: 3.20
+    trigger_condition: "volume_spike_above_threshold"
+  
+  onchain_signal:
+    whale_wallet_threshold: 10000000
+    volume_spike_pct: 51
+    context_dependency: true

@@ -1,9 +1,0 @@
----
-
-
-
-
-  onchain_signal:
-    whale_wallet_threshold: 1000000
-    volume_spike_pct: 48
-    context_dependency: true

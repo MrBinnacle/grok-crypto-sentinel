@@ -8,3 +8,7 @@ Resources:
       Role: arn:aws:iam::123456789012:role/lambda-execution-role
       Runtime: python3.12
       Timeout: 15
+      Code:
+        ZipFile: |
+          def handler(event, context):
+              return {'statusCode': 200, 'body': 'Grok Task Runner'}
