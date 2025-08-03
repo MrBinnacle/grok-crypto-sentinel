@@ -3,6 +3,7 @@ import requests
 import json
 from datetime import datetime
 
+
 def send(signal, persona):
     """
     Sends a signal to Notion.
@@ -29,7 +30,7 @@ def send(signal, persona):
     headers = {
         "Authorization": f"Bearer {notion_token}",
         "Content-Type": "application/json",
-        "Notion-Version": "2022-06-28"
+        "Notion-Version": "2022-06-28",
     }
 
     payload = {
@@ -37,8 +38,8 @@ def send(signal, persona):
         "properties": {
             "Date": {"date": {"start": datetime.utcnow().isoformat()}},
             "Signal": {"title": [{"text": {"content": signal["title"]}}]},
-            "Action": {"rich_text": [{"text": {"content": signal["posture"]}}]}
-        }
+            "Action": {"rich_text": [{"text": {"content": signal["posture"]}}]},
+        },
     }
 
     # Send request to Notion API
