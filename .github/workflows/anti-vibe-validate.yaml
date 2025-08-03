@@ -1,7 +1,7 @@
 ---
 name: ✨ Anti-Vibe Compliance Check
 
-on:
+'on':
   push:
     branches: [main, master]
   pull_request:
